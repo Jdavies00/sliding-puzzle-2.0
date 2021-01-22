@@ -1,19 +1,18 @@
 import React from 'react';
-// import "bootstrap"
+import { Container, Button } from "reactstrap"
+
 function Board(props) {
 
-    let bunchoButonsArray = []
+    let buttonArray = []
     for (let i = 0; i < props.tile_Data_Raw.length; i++) {
         let num = props.tile_Data_Raw[i]
-        let ogButton = <button className=" col-3 btn-primary" onClick={() => props.tile_click(i)} style={{ height: 150 }} key={i}>{num.currentValue}</button>
-        bunchoButonsArray.push(ogButton)
+        let ogButton = <Button outline color="primary" onClick={() => props.tile_click(i)} style={{ height: 150, width: 250 }} key={i}>{num.currentValue}</Button>
+        buttonArray.push(ogButton)
     }
     return (
-        <div className='container'>
-            <div className='row'>
-                {bunchoButonsArray}
-            </div>
-        </div>
+        <Container>
+            {buttonArray}
+        </Container>
     )
 }
 

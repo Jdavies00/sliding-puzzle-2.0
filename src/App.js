@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
-// import 'bootstrap/dist/css/bootstrap.css';
-// import $ from 'jquery';
-// import Popper from 'popper.js';
-// import 'bootstrap/dist/js/bootstrap.bundle.min';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import Board from "./Components/Board"
-
-
-
+import { Container, Row, Col } from "reactstrap"
 
 class App extends Component {
   constructor() {
@@ -40,28 +32,13 @@ class App extends Component {
   }
 
   clickfunction(tileID) {
-    //start looping throught the whole array 
     for (let i = 0; i < 16; i++) {
-      //evil tile is defined as what we wil later be looking for
       var evilTileValue = this.state.dataForTheTile[i].currentValue
-      //confirming it is 0 
       if (evilTileValue === 0)
-
-        //loop the array of possible moves of tile tha was clicked on
         for (let j = 0; j < this.state.dataForTheTile[tileID].possibleMoves.length; j++) {
-
-
-          //posiblemvoes array  for the tile that was clicked on
-          var posibleMoveID = this.state.dataForTheTile[tileID].possibleMoves[j];
-
-          //what tile id has the currentVal of 0?
-          //not looking for ONLY the current val but the corresponding id
-          //current val signals where to check the id against the possible moves
+          var possibleMoveID = this.state.dataForTheTile[tileID].possibleMoves[j];
           var currentMoveToCheck = this.state.dataForTheTile[i].id
-          // console.log(currentMoveToCheck)
-
-          //compare the //posiblemvoes array  for the tile that was clicked on
-          if (posibleMoveID === currentMoveToCheck) {
+          if (possibleMoveID === currentMoveToCheck) {
             console.log('can switch')
             // create a new array with updated values
             let copy = this.state.dataForTheTile
@@ -72,8 +49,11 @@ class App extends Component {
             copy[i].currentValue = temp
             console.log(copy)
             this.setState({ dataForTheTile: copy })
-
-          } else { console.log('can not switch') }
+            break;
+          } else {
+            console.log('can not switch')
+            break
+          }
 
         }
     }
@@ -83,26 +63,18 @@ class App extends Component {
   componentDidUpdate() {
     console.log("state was set", this.state.dataForTheTile);
   }
-
-
-
   render() {
     return (
-
       <>
-        <div style={{ border: '1px solid grey' }}>
-          <div>
+        <Container style={{ border: '1px solid grey' }}>
+          <Col>
             <h1> Sliding Puzzle </h1>
-          </div>
+          </Col>
           <Board
             tile_Data_Raw={this.state.dataForTheTile}
-            tile_click={this.clickfunction}
-          />
-        </div>
-
-
+            tile_click={this.clickfunction} />
+        </Container>
       </>
-
     );
   }
 }
