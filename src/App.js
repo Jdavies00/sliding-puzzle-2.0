@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Board from "./Components/Board"
 import { Container, Row, Col } from "reactstrap"
 
+
+
 class App extends Component {
   constructor() {
     super();
@@ -30,6 +32,7 @@ class App extends Component {
     }
     this.clickfunction = this.clickfunction.bind(this)
   }
+ 
 
   clickfunction(tileID) {
     for (let i = 0; i < 16; i++) {
@@ -49,16 +52,13 @@ class App extends Component {
             copy[i].currentValue = temp
             console.log(copy)
             this.setState({ dataForTheTile: copy })
-            break;
           } else {
             console.log('can not switch')
-            break
           }
 
         }
     }
   }
-
 
   componentDidUpdate() {
     console.log("state was set", this.state.dataForTheTile);

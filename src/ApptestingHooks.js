@@ -10,9 +10,10 @@ function ApptestingHooks() {
         () => {
             callback
         }, []);
-
+        tileArray=[]
     for (let i = 0; i < 16; i++) {
-        let setTileData = { "id": [i], "currentValue": [i], "possibleMoves": [i + 1, i - 1, i + 4, i - 4] }
+        let tileForAray = { "id": [i], "currentValue": [i], "possibleMoves": [[i] + 1, [i-1], [i+4], [i-4]] }
+        tileArray.push(tileForAray)
     }
     let buttonArray = []
     for (let i = 0; i < props.tile_Data_Raw.length; i++) {
